@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Mahasiswa</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        <div class="container">
+        	<div class="card">
+        		<div class="card-header">Mantap</div>
+                        <div class="card-body">
+                            <table class="table table-responsive">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Major</th>
+                                    <th>Name</th>
+                                    <th>Aksi</th>
+                                </tr>
+                                <tr th:each="mahasiswa: ${mahasiswas}">
+                                    <td th:text="${mahasiswa.id}"></td>
+                                    <td th:text="${mahasiswa.major}"></td>
+                                    <td th:text="${mahasiswa.name}"></td>
+                                    <td>
+                                        <form action="form-horizontal" th:object="${mahasiswa}" th:action="${'/mahasiswa/destroy/'+{mahasiswa.id}}" method="post" th:id="'destroyform' + ${mahasiswa.id}"></form>
+                                        <a th:href="${'/mahasiswa/edit/'+{mahasiswa.id}}" class="btn btn-info">Edit</a>
+                                        <button class="btn btn-danger" type="submit" th:form="'destroyform' + ${mahasiswa.id}">Delete</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+        	</div>
+        </div>
+    </body>
+</html>
